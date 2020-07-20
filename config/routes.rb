@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   set_up_sidekiq
   set_up_flipper
 
+  mount Partner::Engine => '/partner-app'
+
   # This is where a superadmin CRUDs all the things
   get :admin, to: "admin#dashboard"
   namespace :admin do

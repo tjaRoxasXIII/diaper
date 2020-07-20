@@ -1,3 +1,9 @@
+PATH
+  remote: engines/partner
+  specs:
+    partner (0.1.0)
+      rails (~> 6.0.3, >= 6.0.3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -541,6 +547,7 @@ DEPENDENCIES
   momentjs-rails
   newrelic_rpm
   nokogiri (>= 1.10.4)
+  partner!
   pg (~> 1.2.3)
   popper_js
   prawn-rails
