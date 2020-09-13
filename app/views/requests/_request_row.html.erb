@@ -2,6 +2,16 @@
   <td class="date"><%= request_row.created_at.strftime("%m/%d/%Y") %></td>
   <td><%= request_row.partner.name %> </td>
   <td>
+    <span class=<%= "help-block" if requested_item_count_over_limit?(request_row) %>>
+      <%= request_row.requested_item_count %>
+    </span>
+  </td>
+  <td>
+    <span class=<%= "help-block" if requested_item_count_over_limit?(request_row) %>>
+      <%= request_row.partner.distribution_limit %>
+    </span>
+  </td>
+  <td>
     <%= render partial: "status", locals: {status: request_row.status} %>
   </td>
   <td class="text-right">

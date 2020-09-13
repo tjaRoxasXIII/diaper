@@ -19,9 +19,9 @@ RSpec.describe "Partner management", type: :system, js: true do
     end
 
     it "shows invite button only for unapproved partners" do
-      expect(page.find(:xpath, "//table/tbody/tr[1]/td[4]")).to have_no_content('Invite')
-      expect(page.find(:xpath, "//table/tbody/tr[2]/td[4]")).to have_content('Invite')
-      expect(page.find(:xpath, "//table/tbody/tr[3]/td[4]")).to have_no_content('Invite')
+      expect(page.find(:xpath, "//table/tbody/tr[1]/td[5]")).to have_no_content('Invite')
+      expect(page.find(:xpath, "//table/tbody/tr[2]/td[5]")).to have_content('Invite')
+      expect(page.find(:xpath, "//table/tbody/tr[3]/td[5]")).to have_no_content('Invite')
     end
 
     context "when filtering" do
@@ -47,6 +47,8 @@ RSpec.describe "Partner management", type: :system, js: true do
       visit subject
       fill_in "Name", with: "Frank"
       fill_in "E-mail", with: "frank@frank.com"
+      fill_in "Distribution Limit", with: 500
+      fill_in "Notes", with: "Here are some notes on this partner."
       check 'send_reminders'
       click_button "Add Partner Agency"
 
@@ -68,11 +70,15 @@ RSpec.describe "Partner management", type: :system, js: true do
     it "User can update a partner" do
       visit subject
       fill_in "Name", with: "Franklin"
+      fill_in "Distribution Limit", with: 100
+      fill_in "Notes", with: "Here are some updated notes on this partner."
       click_button "Update Partner"
 
       expect(page.find(".alert")).to have_content "updated"
       partner.reload
       expect(partner.name).to eq("Franklin")
+      expect(partner.distribution_limit).to eq(100)
+      expect(partner.notes).to eq("Here are some updated notes on this partner.")
     end
 
     it "prevents a user from updating a partner with empty name" do
@@ -98,7 +104,7 @@ RSpec.describe "Partner management", type: :system, js: true do
     partner = create(:partner, name: 'Charities')
     visit url_prefix + "/partners"
 
-    within("table > tbody > tr:nth-child(1) > td:nth-child(4)") { click_on "Invite" }
+    within("table > tbody > tr:nth-child(1) > td:nth-child(5)") { click_on "Invite" }
     invite_alert = page.driver.browser.switch_to.alert
     expect(invite_alert.text).to eq("Send an invitation to #{partner.name} to begin using the partner application?")
 

@@ -2,14 +2,16 @@
 #
 # Table name: partners
 #
-#  id              :integer          not null, primary key
-#  email           :string
-#  name            :string
-#  send_reminders  :boolean          default(FALSE), not null
-#  status          :integer          default("uninvited")
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  organization_id :integer
+#  id                 :integer          not null, primary key
+#  distribution_limit :integer          default(0), not null
+#  email              :string
+#  name               :string
+#  notes              :text
+#  send_reminders     :boolean          default(FALSE), not null
+#  status             :integer          default("uninvited")
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  organization_id    :integer
 #
 
 RSpec.describe Partner, type: :model do
@@ -39,6 +41,12 @@ RSpec.describe Partner, type: :model do
       create(:partner, email: "foo@bar.com")
       expect(build(:partner, email: "foo@bar.com")).not_to be_valid
       expect(build(:partner, email: "boooooooooo")).not_to be_valid
+    end
+
+    it "requires the distribution limit to be 0 or greater" do
+      expect(build(:partner, distribution_limit: nil)).not_to be_valid
+      expect(build(:partner, distribution_limit: -10)).not_to be_valid
+      expect(build(:partner, distribution_limit: 100)).to be_valid
     end
   end
 

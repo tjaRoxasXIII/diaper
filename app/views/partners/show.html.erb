@@ -27,7 +27,7 @@
     <div class="row">
       <div class="col-12">
         <!-- Default box -->
-        <div class="card card-info card-outline">
+        <div class="card card-primary card-outline">
           <div class="card-header">
             <h2 class="card-title"><%= @partner.name %></h2>
           </div>
@@ -50,7 +50,7 @@
               </div>
               <!-- /.col -->
               <div class="col-sm-4 col-4">
-                <div class="description-block border-right">
+                <div class="description-block">
                   <h1 style="color:purple"><%= total_on_hand(@impact_metrics.dig("agency", "family_zipcodes") || 0) %> </h1>
                   <h5>Zipcodes served</h5>
                   <%= modal_button_to("#seeZipcodes", {text: "See Zipcodes?", size: "xs"}) if @impact_metrics.dig("agency", "family_zipcodes_list").present? %>
@@ -71,6 +71,31 @@
             <%= modal_button_to("#addUserModal", {text: "Add/Remind Partner", size: "xs"}) if can_administrate? %>
             <%= print_button_to approve_application_partner_path(@partner), {text: "Activate Partner Now", icon: "thumbs-o-up", type: "success", size: "xs"} if can_administrate? %>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <!-- Default box -->
+        <div class="card card-info card-outline">
+          <div class="card-header">
+            <h2 class="card-title">Information & Settings</h2>
+          </div>
+          <div class="card-body p-0">
+            <div class="row border-bottom">
+              <div class="col-sm-12 col-12">
+                <div class="m-3">
+                  <i class="fa fa-lock mr-1"></i><strong>Distribution Limit</strong>
+                  <p class="text-muted"><%= @partner.distribution_limit || 0 %></p>
+                  <i class="fa fa-sticky-note mr-1"></i><strong>Notes</strong>
+                  <p class="text-muted"><%= @partner.notes || "N/A" %></p>
+                </div>
+                <!-- /.description-block -->
+              </div>
+              <!-- /.col -->
+            </div>
+          </div>
+          <!-- /.card-body -->
         </div>
       </div>
     </div>

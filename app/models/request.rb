@@ -57,4 +57,8 @@ class Request < ApplicationRecord
       end
     request
   end
+
+  def requested_item_count
+    request_items.map { |i| i["quantity"] }.sum
+  end
 end

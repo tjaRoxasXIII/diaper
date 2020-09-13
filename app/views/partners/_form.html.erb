@@ -17,6 +17,14 @@
                 <span class="input-group-text"><i class="fa fa-envelope"></i></span>
                 <%= f.input_field :email, class: "form-control" %>
               <% end %>
+              <%= f.input :distribution_limit, label: "Distribution Limit", wrapper: :input_group do %>
+                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                <%= f.input_field :distribution_limit, class: "form-control", min: 0 %>
+              <% end %>
+              <%= f.input :notes, label: "Notes", wrapper: :input_group do %>
+                <span class="input-group-text"><i class="fa fa-sticky-note"></i></span>
+                <%= f.input_field :notes, class: "form-control", rows: 6 %>
+              <% end %>
               <%= f.input :send_reminders, label: "Send Reminders?", wrapper: :input_group do %>
                 <%= f.check_box :send_reminders, {class: "input-group-text", id: "send_reminders"}, "true", "false" %>
               <% end %>
@@ -34,4 +42,3 @@
     </div><!-- /.container-fluid -->
   </section>
 <% end %>
-

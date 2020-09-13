@@ -2,14 +2,16 @@
 #
 # Table name: partners
 #
-#  id              :integer          not null, primary key
-#  email           :string
-#  name            :string
-#  send_reminders  :boolean          default(FALSE), not null
-#  status          :integer          default("uninvited")
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  organization_id :integer
+#  id                 :integer          not null, primary key
+#  distribution_limit :integer          default(0), not null
+#  email              :string
+#  name               :string
+#  notes              :text
+#  send_reminders     :boolean          default(FALSE), not null
+#  status             :integer          default("uninvited")
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  organization_id    :integer
 #
 
 class Partner < ApplicationRecord
@@ -23,6 +25,7 @@ class Partner < ApplicationRecord
 
   validates :organization, presence: true
   validates :name, presence: true, uniqueness: { scope: :organization }
+  validates :distribution_limit, numericality: { greater_than_or_equal_to: 0}
 
   validates :email, presence: true,
                     uniqueness: true,

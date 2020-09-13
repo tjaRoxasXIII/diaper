@@ -2,6 +2,7 @@
 <tr>
   <td><%= link_to partner_row.name, partner_path(partner_row) %></td>
   <td><%= link_to partner_row.email, "mailto:#{partner_row.email}" %></td>
+  <td><%= truncate(partner_row.notes, length: 50) %></td>
   <td>
     <% case status %>
     <% when "uninvited" %>
