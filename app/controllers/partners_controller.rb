@@ -31,8 +31,8 @@ class PartnersController < ApplicationController
   end
 
   def show
-    @impact_metrics = JSON.parse(DiaperPartnerClient.get({ id: params[:id] }, query_params: { impact_metrics: true }))
     @partner = current_organization.partners.find(params[:id])
+    @impact_metrics = JSON.parse(DiaperPartnerClient.get({ id: params[:id] }, query_params: { impact_metrics: true })) unless @partner.uninvited?
     @partner_distributions = @partner.distributions.order(created_at: :desc)
   end
 
@@ -63,7 +63,7 @@ class PartnersController < ApplicationController
   def update
     @partner = current_organization.partners.find(params[:id])
     if @partner.update(partner_params)
-      redirect_to partners_path, notice: "#{@partner.name} updated!"
+      redirect_to partner_path(@partner), notice: "#{@partner.name} updated!"
     else
       flash[:error] = "Something didn't work quite right -- try again?"
       render action: :edit
