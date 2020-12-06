@@ -8,8 +8,22 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  <<: *default
-  timeout: 5000
+  primary:
+    <<: *default
+    timeout: 5000
+  primary_replica:
+    <<: *default
+    replica: true
+    timeout: 5000
+  partners:
+    adapter: postgresql
+    encoding: unicode
+    host: localhost
+    pool: 5
+    username: postgres
+    password: io
+    database: partner_dev
+    timeout: 5000
 
 test:
   <<: *default
