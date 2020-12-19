@@ -23,8 +23,11 @@ def set_up_flipper
 end
 
 Rails.application.routes.draw do
-  devise_for :partner_users
   devise_for :users
+
+  namespace :partners do
+    devise_for :users
+  end
 
   set_up_sidekiq
   set_up_flipper
