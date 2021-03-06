@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resource :dashboard, only: [:show]
     resources :requests, only: [:show, :new, :index, :create]
     resources :families
+    resources :authorized_family_members
   end
 
   # This is where a superadmin CRUDs all the things
