@@ -67,7 +67,7 @@ module Partners
     private
 
     def family_params
-      params.require(:family).permit(
+      params.require(:partners_family).permit(
         :agency_guardian_id,
         :comments,
         :guardian_country,

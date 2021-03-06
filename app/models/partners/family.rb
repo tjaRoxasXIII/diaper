@@ -27,6 +27,7 @@ module Partners
   class Family < Base
     belongs_to :partner
     has_many :children, dependent: :destroy
+    has_many :authorized_family_members, dependent: :destroy
 
     include Filterable
 

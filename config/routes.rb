@@ -34,6 +34,10 @@ Rails.application.routes.draw do
   namespace :partners do
     resource :dashboard, only: [:show]
     resources :requests, only: [:show, :new, :index, :create]
+
+    resources :children, except: [:destroy] do
+      post :active
+    end
     resources :families
     resources :authorized_family_members
   end
