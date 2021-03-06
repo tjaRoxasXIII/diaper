@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   namespace :partners do
     resource :dashboard, only: [:show]
     resources :requests, only: [:show, :new, :index, :create]
+    resources :families
   end
 
   # This is where a superadmin CRUDs all the things
